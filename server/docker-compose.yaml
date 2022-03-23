@@ -6,8 +6,8 @@ services:
     ports: 
       - 4000:4000
     environment: 
-      - DB_NAME=challenge
-      - DB_CONNECTION=mongodb://username:codechallengepassword@db:4000
+      - DB_NAME=codechallenge
+      - DB_CONNECTION=mongodb://username:codechallengepassword@db:27017
     depends_on:
       - db
     volumes:
