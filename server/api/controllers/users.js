@@ -12,4 +12,14 @@ router.get('/', async (req, res) => {
     }
 })
 
+// Create post route
+router.post('/', async (req, res) => {
+    try {
+        const anonUser = await AnonUser.create(req.body.title, req.body.author, req.body.message)
+        res.json(anonUser)
+    } catch(err) {
+        res.status(404).json({err})
+    }
+})
+
 module.exports = router;
