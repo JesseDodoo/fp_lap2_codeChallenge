@@ -6,8 +6,8 @@ server.use(cors());
 server.use(express.json());
 
 
-// const footballRoutes = require('./controllers/footballers')
-// server.use('/footballers', footballRoutes)
+const anonUserRoutes = require('./controllers/users')
+server.use('/users', anonUserRoutes)
 
 // Root route
 server.get('/', (req, res) => res.send('Hello, client!'))
