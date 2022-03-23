@@ -1,0 +1,29 @@
+version: '3'
+services:
+  server:
+    image: node:16.13.1
+    working_dir: /code
+    ports: 
+      - 4000:4000
+    environment: 
+      - DB_NAME=challenge
+      - DB_CONNECTION=mongodb://username:codechallengepassword@db:27017
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./api
+        target: /code
+    command: bash -c "npm install && npm start"
+
+  db:
+    image: mongo:latest
+    volumes:
+      - "dbdata:/var/lib/mongodb/data"
+      - "./db/seeds.js:/docker-entrypoint-initdb.d/seeds.js:ro"
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_DATABASE=codechallenge
+      - MONGO_INITDB_ROOT_PASSWORD=codechallengepassword
+volumes:
+  dbdata:
